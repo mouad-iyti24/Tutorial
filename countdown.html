@@ -1,0 +1,166 @@
+<div style="width: 100px; height: 50px;"></div>
+
+<div class="base-timer">
+  <svg class="base-timer__svg" viewbox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+    <!--Background circle-->
+    <circle class="base-timer__path-background" cx="75" cy="75" r="70" stroke-dasharray="358.8" stroke-dashoffset="-58.64" transform="rotate(-285 75 75)"></circle>
+    
+    <!--Blue line-->
+    <circle class="base-timer__path-elapsed" cx="75" cy="75" r="70" stroke-dasharray="439.8" stroke-dashoffset="0" transform="rotate(-237 75 75)"></circle>
+  </svg>
+  <span class="base-timer__label" id="base-timer-label"></span>
+  <button id="subscribe-button">جاري تجهيز الرابط</button>
+  <button id="link-button" onclick="window.location.href='https://t.me/mouadiyti24'" style="display: none;">الرابط جاهز</button>
+</div>
+
+<script>
+// وقت البدء بالثواني
+var startTime = 10;
+// مدة التأخير قبل بدء العد
+var delayTime = 2.5; // الوقت بالثواني
+
+// The duration of the timer in seconds
+const TIME_LIMIT = 10;
+// The remaining time in seconds
+let timeLeft = TIME_LIMIT;
+// The initial value of the circle dash offset
+let circleDashOffset = 439.8;
+// Get the elements
+const timerLabel = document.getElementById("base-timer-label");
+const circlePath = document.querySelector(".base-timer__path-elapsed");
+
+// عرض الوقت مبدئيا
+timerLabel.innerHTML = formatTime(timeLeft);
+
+// Start the timer after delay
+setTimeout(startTimer, delayTime * 1000);
+
+function startTimer() {
+  // Update the timer every second
+  const timerInterval = setInterval(() => {
+    // Decrease the remaining time
+    timeLeft--;
+    // Update the label
+    timerLabel.innerHTML = formatTime(timeLeft);
+    // Calculate the new dash offset
+    circleDashOffset -= 35.88;
+    // Update the circle dash offset
+    circlePath.style.strokeDashoffset = circleDashOffset;
+    // If the time is up, stop the timer and reset the values
+    if (timeLeft === 0) {
+      clearInterval(timerInterval);
+      // Show the button
+      document.getElementById("link-button").style.display = "block";
+      // Hide the subscribe button
+      document.getElementById('subscribe-button').style.display = 'none';
+    }
+  }, 1000);
+}
+
+// Format the time in SS format
+function formatTime(time) {
+  let seconds = time % 60;
+  return `${seconds}`;
+}
+</script>
+
+<style>
+/* Sets the containers height and width */
+.base-timer {
+  position: relative;
+  margin: auto;
+  height: 400px;
+  width: 300px;
+  align-items: center;
+  text-align: center;
+  font: center; 
+}
+/* The SVG path that displays the timer's progress */
+.base-timer__path-elapsed {
+  stroke-width: 10px;
+  stroke: #02ccfe; /* Blue color */
+  fill: none;
+  stroke-dashoffset: 439.8; /* Offset to fill the circle initially */
+  transition: stroke-dashoffset -1s linear;
+  z-index: 2; /* Ensure the blue line is above the grey line */
+}
+/* The SVG path that displays the background */
+.base-timer__path-background {
+  stroke-width: 10px;
+  stroke: #e0e0e0; /* Grey color */
+  fill: white;
+  z-index: 1; /* Ensure the grey line is behind the blue line */
+}
+/* The time label */
+.base-timer__label {
+  position: absolute;
+  margin: auto;
+  width: 400px;
+  height: 300px;
+  bottom: 170px;
+  top: 80px;
+  right: -60px;
+  left: -60px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font: center;
+  font-size: 80px;
+}
+/* Style for the 'subscribe-button' */
+#subscribe-button {
+  background-color: #ebecf0; /* تغيير لون الخلفية إلى الرمادي الفاتح */
+  color: #bfbfbf; /* تغيير لون النص إلى الأسود */
+  border: 1px solid #bfbfbf; /* تغيير الحد إلى الرمادي */
+  border-radius: 30px; /* جعل الزوايا مستديرة */
+  padding: 5px 15px; /* إضافة تبطين لزيادة حجم الزر وتوسيط النص */
+  font-size: 15px; /* تغيير حجم الخط */
+  cursor: pointer; /* تغيير شكل المؤشر عند الوقوف على الزر */
+  outline: none; /* إزالة الخط الخارجي عند النقر */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), /* الظل الأصلي للزر */
+  0 0 0 1.5px #bfbfbf, /* الخط الرمادي */
+  0 0 0 2px #bfbfbf; /* الحد الرمادي الإضافي */
+  display: block; /* لضمان ظهور الزر */
+  position: absolute;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  bottom: -189px;
+  left: 200px;
+  right: 70px;
+  top: -40px;
+  width: 160px;
+  height: 40px;
+}
+
+/* Specific styles for the 'link-button' */
+#link-button {
+  background-color: #f9fafb; /* White background */
+  color: #4A90E2; /* Blue text */
+  border: 1.5px solid #BE6400; /* Orange border */
+  border-radius: 30px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for size and centering text */
+  font-size: 20px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  outline: none; /* No outline on focus */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), /* Original button shadow */
+  0 0 0 1px white, /* White line */
+  0 0 0 2px #BE6400; /* Orange border */
+  display: none; /* Initially hidden */
+  position: absolute; /* Absolute position for the button */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  bottom: -189px;
+  left: 200px;
+  right: 70px;
+  top: -40px;
+  width: 160px;
+  height: 40px;
+}
+</style>

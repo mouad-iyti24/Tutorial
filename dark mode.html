@@ -1,0 +1,80 @@
+<style>
+    .icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      right: 30px;
+      bottom: 5px;
+      background: none;
+      border-radius: 100%;
+      gap: 2%;
+      z-index: 9999;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: white;
+      background: none;
+      text-align: center;
+      line-height: 50px;
+      font-size: 25px;
+      display: none;
+      margin: 25%;
+      z-index: 9999;
+      cursor: pointer;
+    }
+    .home-icon { background: orange; }
+    .search-icon { background: #942828; }
+    .grid-icon { background: blue; }
+    .moon-icon {background:#04616a; }
+    .arrow-icon { background: #00008b; }
+    .settings-icon {
+      background: #f2f2f2;
+      color: #0096ff;
+      display: block;
+    }
+
+    .search-bar-container {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+  <div class="icon-container">
+   <div class="icon home-icon hidden-icons"><i class="fa-solid fa-house"></i></div>
+    <div class="icon search-icon hidden-icons"><i class="fas fa-search"></i></div>
+    <div class="icon moon-icon hidden-icons"><i class="fa-solid fa-moon"></i></div>
+    <div class="icon grid-icon hidden-icons"><i class="fas fa-th-large"></i></div>
+    <div class="icon arrow-icon hidden-icons"><i class="fas fa-chevron-up"></i></div>
+    <div class="icon settings-icon"><i class="fas fa-cog"></i></div>
+  </div>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />  
+  <script>
+    document.querySelector('.home-icon').onclick = function () {
+      window.location.href = 'https://mouad-iyti.blogspot.com/';
+    };
+
+    document.querySelector('.search-icon').onclick = function () {
+      document.querySelector('.search-bar-container').style.display = 'block';
+      window.location.href = '';
+    };
+
+    document.querySelector('.grid-icon').onclick = function () {
+      window.location.href = '';
+    };
+
+    document.querySelector('.arrow-icon').onclick = function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    document.querySelector('.settings-icon').onclick = function () {
+      document.querySelectorAll('.icon.hidden-icons').forEach((icon) => {
+        icon.style.display = icon.style.display === 'none' || icon.style.display === ''
+          ? 'block'
+          : 'none';
+      });
+    };
+  </script>
